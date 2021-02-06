@@ -30,12 +30,8 @@ class DBKeeper:
             self.master = self.db.TB("master")
         self.mastertb = self.master.query()
 
-    def update(self, symbol: dict, data: dict):
-        if not symbol in self.mastertb:
-            self.mastertb[symbol] = {}
-        for item in data:
-            self.mastertb[symbol][item] = data[item]
-        self.master.update(self.mastertb)
+    def update(self, data: dict):
+        self.master.update(data)
         self.db.commit()
 
     def query(self, sql_condition: str = "") -> dict:
